@@ -1,9 +1,33 @@
-Huiswerk voor volgende les:
+Links naar online info:
+- https://www.chaijs.com/api/bdd/
 
-- maak de /games/:id route werkend
-- voeg put en delete routes toe en maak werkend
+Huiswerk voor volgende les (3):
 
-- bekijk/lees de docs op expressjs.com
-	- getting started
-	- guide, routing t/m errorhandling (templates is optioneel)
+Maak testcases waarmee je de api test die we 
+tot nu toe gemaakt hebben. De api biedt endpoints voor /api/games
+en /api/games/:id. Een request naar een van deze api's geeft
+je een resultaat. Check of dat het resultaat is dat je verwacht.
+Alle andere requests zouden een foutmelding moeten geven. 
+Check ook of dat de foutmelding is die je verwacht.
 
+Voorbeelden:
+- een GET op /api/games
+	- moet HTTP code 200 retourneren
+	- moet resultaten teruggeven
+		dat een array is
+		dat bestaat uit de verwachte waarden
+		dat de verwachte lengte heeft
+		waarvan iedere waarde een object is, met 
+			name, die een string is, met de verwachte waarde
+			producer, die enz enz.
+
+- een GET naar een endpoint die niet bestaat
+	- moet geen HTTP maar 404 of 500 (of iets anders) retourneren
+	- moet de juiste error bevatten
+		- wat een object is
+		- met een passende message
+		- met de juiste code 
+
+Dus 
+- je checkt in je tests dat je terug krijgt wat je verwacht als het goed gaat,
+- en je checkt dat je bij foutsituaties ook krijgt wat je verwacht.
