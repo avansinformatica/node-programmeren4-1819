@@ -1,7 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
-const gameController = require('./src/controllers/game.controller')
+const gameRoutes = require('./src/routes/game.routes')
 
 var app = express()
 
@@ -10,8 +10,10 @@ app.use(bodyParser.json())
 
 const port = 3000
 
-app.get('/games', gameController.getAll)
-app.get('/games/:gameId', gameController.getById)
-app.post('/games', gameController.addNewGame)
+app.use('/api', gameRoutes)
+
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
+// for testing purpose
+module.exports = app

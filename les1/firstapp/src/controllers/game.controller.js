@@ -1,11 +1,8 @@
+const Game = require('../models/game.model')
 
-
-let games = [{
-	name: 'Battlefield 5',
-	producer: 'EA',
-	year: 2018,
-	type: 'FPS'
-}]
+let games = [
+	new Game('Battlefield 5', 'EA', 2018, 'FPS')
+]
 
 // Voorbeeld werken met arrays
 games.forEach((item) => {
@@ -29,7 +26,8 @@ module.exports = {
 		console.dir(req.body)
 
 		// add game to array of games
-		games.push(req.body)
+		const game = new Game(req.body.name, req.body.producer, req.body.year, req.body.type)
+		games.push(game)
 
 		res.status(200).json({ 
 			message: req.body.name + ' succesvol toegevoegd'
