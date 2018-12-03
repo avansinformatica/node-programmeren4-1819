@@ -3,6 +3,8 @@ const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const gameRoutes = require('./src/routes/game.routes')
 const ApiError = require('./src/models/apierror.model')
+const dbpool = require('./src/config/db')
+const env = process.env.NODE_ENV ? process.env.NODE_ENV : 'development';
 
 var app = express()
 
@@ -21,13 +23,14 @@ app.use('*', (req, res, next) => {
 
 // handler voor errors
 app.use('*', (err, req, res, next) => {
-	// hier heb ik de error
 	console.dir(err)
-	// -> return response naar caller
 	res.status(err.code).json({error: err}).end()
 })
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => {
+	console.log(`Server running in ${env} mode.`)
+	console.log(`Gameserver listening on port ${port}`);
+})
 
 // for testing purpose
 module.exports = app

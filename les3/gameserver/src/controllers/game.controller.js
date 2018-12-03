@@ -1,20 +1,20 @@
 const Game = require('../models/game.model')
 const ApiError = require('../models/apierror.model')
-
-let games = [
-	new Game('Battlefield 5', 'EA', 2018, 'FPS')
-]
-
-// Voorbeeld werken met arrays
-games.forEach((item) => {
-	// doe iets met item
-})
+const pool = require('../config/db')
 
 module.exports = {
 
-	getAll(req, res) {
+	getAll(req, res, next) {
 		console.log('gameController.get called')
-		res.status(200).json(games).end()
+
+		pool.query("SELECT * FROM games", (err, rows, fields) => {
+			// Connection is automatically released when query resolves
+			if(err){
+				console.dir(err)
+				return next(new ApiError(err.sqlMessage || err , 404))
+			}
+			res.status(200).json({ results: rows }).end()
+		})
 	},
 
 	getById(req, res, next) {
@@ -28,13 +28,10 @@ module.exports = {
 		}
 	},
 
-	addNewGame(req, res) {
+	addNewGame(req, res, next) {
 		console.log('gameController.addNewGame called')
 		console.dir(req.body)
 
-		// add game to array of games
-		const game = new Game(req.body.name, req.body.producer, req.body.year, req.body.type)
-		games.push(game)
 
 		res.status(200).json({ 
 			message: req.body.name + ' succesvol toegevoegd'
