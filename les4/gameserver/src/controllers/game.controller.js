@@ -16,13 +16,14 @@ module.exports = {
 	getAll(req, res, next) {
 		console.log('gameController.get called')
 
-		pool.query("SELECT * FROM games", (err, rows, fields) => {
+		// For pool initialization, see above
+		pool.query("SELECT * FROM games", function (err, rows, fields) {
 			// Connection is automatically released when query resolves
 			if(err){
-				console.dir(err)
-				return next(new ApiError(err.sqlMessage || err , 404))
+				console.log(err)
+				return next(new ApiError(err, 500))
 			}
-			res.status(200).json({ results: rows }).end()
+			res.status(200).json({ result: rows }).end()
 		})
 	},
 
@@ -37,10 +38,13 @@ module.exports = {
 		}
 	},
 
-	addNewGame(req, res, next) {
+	addNewGame(req, res) {
 		console.log('gameController.addNewGame called')
 		console.dir(req.body)
 
+		// add game to array of games
+		const game = new Game(req.body.name, req.body.producer, req.body.year, req.body.type)
+		games.push(game)
 
 		res.status(200).json({ 
 			message: req.body.name + ' succesvol toegevoegd'
