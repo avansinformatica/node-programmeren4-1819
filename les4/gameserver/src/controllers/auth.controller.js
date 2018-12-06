@@ -3,7 +3,6 @@ const pool = require('../config/db')
 const config = require('../config/config')
 const jwt = require('jsonwebtoken');
 
-
 module.exports = {
 
 	register(req, res, next) {

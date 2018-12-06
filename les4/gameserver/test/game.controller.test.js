@@ -7,8 +7,33 @@ chai.use(chaiHttp)
 
 const endpointToTest = '/api/games'
 
+describe('Games API GET', () => {
+
+    it('should return an array of Games', (done) => {
+
+        const token = require('./authentication.test').token
+
+        chai.request(server)
+            .get(endpointToTest)
+            .set('x-access-token', token)
+            .end((err, res) => {
+                res.should.have.status(200)
+                res.body.should.be.a('object')
+                res.body.result.should.be.an('array')
+                res.body.result.should.have.length(3)
+                done()
+            })
+    })
+
+})
+
+// 
+// Verwijder .skip in ieder van de volgende tests en implementeer ze op de juiste manier.
+//
+
 describe('Games API POST', () => {
-    it('should return a valid game when posting a valid object', (done) => {
+
+    it.skip('should return a valid game when posting a valid object', (done) => {
  
         chai.request(server)
             .post(endpointToTest)
@@ -34,7 +59,7 @@ describe('Games API POST', () => {
         })
     })
 
-    it('should throw an error when using invalid JWT token', (done) => {
+    it.skip('should throw an error when using invalid JWT token', (done) => {
         chai.request(server)
             .post(endpointToTest)
             .set('x-access-token', 'in.valid.token')
@@ -55,7 +80,7 @@ describe('Games API POST', () => {
             })
     })
 
-    it('should throw an error when no firstname is provided', (done) => {
+    it.skip('should throw an error when no firstname is provided', (done) => {
         const token = require('./authentication.test').token
         chai.request(server)
             .post(endpointToTest)
@@ -78,33 +103,10 @@ describe('Games API POST', () => {
             })
     })
 
-    it.skip('should throw an error when no valid firstname is provided', (done) => {
-        // Write your test here
-        done()
-    })
-
-    it.skip('should throw an error when no lastname is provided', (done) => {
-        // Write your test here
-        done()
-    })
-
-    it.skip('should throw an error when no valid lastname is provided', (done) => {
-        // Write your test here
-        done()
-    })
-
-})
-
-describe('Games API GET', () => {
-    it.skip('should return an array of Gamess', (done) => {
-        // Write your test here
-        done()
-    })
-
 })
 
 describe('Games API PUT', () => {
-    it('should return the updated Games when providing valid input', (done) => {
+    it.skip('should return the updated Games when providing valid input', (done) => {
         const token = require('./authentication.test').token
         // console.log('token = ' + token)
         chai.request(server)
