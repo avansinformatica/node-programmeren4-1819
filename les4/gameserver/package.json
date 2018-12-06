@@ -5,8 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "set DB_DATABASE=gamedb&& set DB_USER=gamedb_user&& nodemon server.js",
-    "pretest": "set DB_DATABASE=gamedb_test&& set DB_USER=gamedb_test_user",
-    "test": "./node_modules/.bin/mocha --reporter spec --exit"
+    "test": "set DB_DATABASE=gamedb_test&& set DB_USER=gamedb_test_user&& mocha --reporter spec --exit"
   },
   "keywords": [
     "nodejs",
