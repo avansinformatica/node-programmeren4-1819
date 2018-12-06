@@ -55,7 +55,7 @@ module.exports = {
 					}).end()
 				});
 			} else {
-				return next(new ApiError('Password does not match ', 500))
+				return next(new ApiError('Passwords does not match ', 500))
 			}
 		})
 	},

@@ -1,3 +1,13 @@
 Huiswerk voor volgende les (5):
 
-Volgt.
+Zorg dat de testcases voor alle /api/games endpoints werken met JWT tokens. 
+Voorbeeldcode staat al in de testcases.
+
+Let op: Het is belangrijk dat je een 2e testdatabase maakt voordat je gaat testen!
+- importeer het gamedb.test.sql script in mySql
+- start de tests met het command: 
+
+	set DB_DATABASE=gamedb_test&set DB_USER=gamedb_test_user& npm test
+
+(zie ook de scripts-section in package.json)
+

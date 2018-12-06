@@ -1,18 +1,58 @@
 const chai = require('chai')
 const chaiHttp = require('chai-http')
 const server = require('../server')
+const pool = require('../src/config/db')
 
 chai.should()
 chai.use(chaiHttp)
 
 const endpointToTest = '/api/games'
 
+const gamedata = {
+    title: 'gametitle',
+    producer: 'gameproducer',
+    year: 2000,
+    type: 'ADVENTURE'
+}
+
 describe('Games API GET', () => {
 
+    //
+    // Deze functie wordt eenmaal aangeroepen voordat de tests worden gestart.
+    //
+    before((done) => {
+        // Verwijder alle voorgaande data uit de tabel
+        const query = 'DELETE FROM `games`'
+        pool.query(query, (err, rows, fields) => {
+            if (err) {
+                assert.fail(err)
+            } else {
+                // Registreer data in de testdatabase
+                const query = 'INSERT INTO `games` (`title`, `producer`, `year`, `type`) VALUES (?, ?, ?, ?)'
+                const values = [gamedata.title, gamedata.producer, gamedata.year, gamedata.type]
+                pool.query(query, values, (err, rows, fields) => {
+                    if (err) {
+                        assert.fail(err)
+                    } else {
+                        done();
+                    }
+                })
+            }
+        })
+    });
+
+    // beforeEach functie wordt aangeroepen voor iedere test.
+    beforeEach(function () {
+        console.log('beforeEach')
+        // set things we need for testing
+        //
+        // Je zou hier kunnen kiezen om de database voor iedere test leeg te maken 
+        // en opnieuw te vullen met enkele waarden, zodat je weet wat er in zit.
+        //
+    });
+
     it('should return an array of Games', (done) => {
-
         const token = require('./authentication.test').token
-
         chai.request(server)
             .get(endpointToTest)
             .set('x-access-token', token)
@@ -20,11 +60,10 @@ describe('Games API GET', () => {
                 res.should.have.status(200)
                 res.body.should.be.a('object')
                 res.body.result.should.be.an('array')
-                res.body.result.should.have.length(3)
+                res.body.result.should.have.length(1)
                 done()
             })
     })
-
 })
 
 // 
