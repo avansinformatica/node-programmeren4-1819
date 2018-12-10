@@ -1,0 +1,19 @@
+
+Onderwerpen voor les 5
+
+- Git Workflows
+	- workshop 
+
+- Userid toevoegen aan entiteiten in de database
+	- user mag alleen items verwijderen of wijzigen die van hem/haarzelf zijn.
+	- testcases aanpassen/maken
+
+- Producer-entiteit uit Game-entiteit splitsen
+	- endpoints toevoegen
+	- juiste acties uitvoeren
+	- testcases
+
+Vooruitblik naar les 6:
+
+- we beginnen om 9:30u ipv 8:45
+- Overview/herhaling/vooruitblik naar eindopdracht.

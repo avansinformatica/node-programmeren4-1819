@@ -1,0 +1,29 @@
+{
+  "name": "gameserver",
+  "version": "0.4.0",
+  "description": "My personal nodejs express gameserver app",
+  "main": "server.js",
+  "scripts": {
+    "start": "set DB_DATABASE=gamedb&& set DB_USER=gamedb_user&& nodemon server.js",
+    "test": "set DB_DATABASE=gamedb_test&& set DB_USER=gamedb_test_user&& mocha --reporter spec --exit"
+  },
+  "keywords": [
+    "nodejs",
+    "express"
+  ],
+  "author": "Robin",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.4.0",
+    "moment": "^2.22.2",
+    "morgan": "^1.9.1",
+    "mysql2": "^1.6.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.7",
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "mocha": "^5.1.1"
+  }
+}
